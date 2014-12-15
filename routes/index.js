@@ -3,6 +3,9 @@
 // the list is loaded from config file under config/index.js
 var presentations = {};
 
+var curAddress;
+var curPort;
+
 var demoPpt = function(req, res){
 	console.log("not that bad");
 	// alert("I am an alert box!");
@@ -20,6 +23,15 @@ var controllerRoute = function(req, res){
   res.render('controller', { title: 'Remote Presentation Controller', layout: "controller_layout" })
 };
 
+var controlIpAddress = function(req, res) {
+	res.render({msg:'hello word!'});
+}
+
+exports.informCurrentAddress = function(address, port) {
+	curAddress = address;
+	curPort = port;
+}
+
 exports.setupRemotePresenter = function(app, io, config){
 
 	presentations = config.presentations; // load initial presentation list from config file
@@ -27,6 +39,14 @@ exports.setupRemotePresenter = function(app, io, config){
 	app.get('/myppt', myPpt);
 		
 	app.get('/controller', controllerRoute);
+
+
+	app.get('/getCurrentAddress', function(request, response){
+		var json = {"username":curAddress,"password": curPort};
+	  console.log(json);      // your JSON
+	  response.send(json);    // echo the result back
+	});
+  		
 	
 	// setup remote control here
 	// socket.io setup

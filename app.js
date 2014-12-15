@@ -10,6 +10,11 @@ var express = require('express')
 
 var app = module.exports = express.createServer();
 
+
+
+
+
+
 // socket io
 var io = require('socket.io');
 
@@ -38,6 +43,8 @@ io.configure(function () {
 });
 
 
+
+
 // configure express
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -60,6 +67,8 @@ app.configure('production', function(){
 
 
 // remote control the presentation server code
+
 routes.setupRemotePresenter(app, io, config);
 app.listen(process.env.PORT || 3000);
+routes.informCurrentAddress(app.address().address, app.address().port);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
