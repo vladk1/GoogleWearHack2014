@@ -1,0 +1,9 @@
+{
+  "firebase": "wearhack",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
