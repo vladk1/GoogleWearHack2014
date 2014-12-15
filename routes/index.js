@@ -8,8 +8,7 @@ var curPort;
 
 var demoPpt = function(req, res){
 	console.log("not that bad");
-	// alert("I am an alert box!");
-  res.render('demo', { title: 'Demo Presentation' })
+	res.render('demo', { title: 'Demo Presentation' })
 };
 
 var myPpt = function(req, res){
@@ -43,12 +42,10 @@ exports.setupRemotePresenter = function(app, io, config){
 
 	app.get('/getCurrentAddress', function(request, response){
 			var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
-			
+
 			var json = {"curAddress":ip,"curPort": curPort};
 			console.log(json);      // your JSON
 			response.send(json);    // echo the result back
-            // alert( data.host);
-		
 	});
   		
 	
@@ -56,8 +53,6 @@ exports.setupRemotePresenter = function(app, io, config){
 	// socket.io setup
 	io.sockets.on('connection', function (socket) {
 
-		// console.log('hi');
-		
 		// once connected need to broadcast the cur slide data
 		 socket.on('request_presentation', function(data){
 		 	if(presentations[data.id])
@@ -114,34 +109,31 @@ exports.setupRemotePresenter = function(app, io, config){
 				var curppt = presentations[pptId];
 				// update ppt information
 
-				if(cmd === 'up')
-				{
+				if(cmd === 'up') {
 					curppt.indexv--;
-				}
-				else if(cmd === 'down')
-				{
+				} else if(cmd === 'down') {
 					curppt.indexv++;
-				}
-				else if(cmd === 'left')
-				{
+				} else if(cmd === 'left') {
 					curppt.indexh--;
-				}
-				else if(cmd === 'right')
-				{
+				} else if(cmd === 'right') {
 					curppt.indexh++;
 				}
 				
-				if(curppt.indexh < 0 )
+				if(curppt.indexh < 0 ) {
 					curppt.indexh = 0;
+				}
 
-				if(curppt.indexh > 4 )
+				if(curppt.indexh > 4 ) {
 					curppt.indexh = 4;
+				}
 					
-				if(curppt.indexv < 0 )
+				if(curppt.indexv < 0 ) {
 					curppt.indexv = 0;
+				}
 
-					if(curppt.indexv > 4 )
+				if(curppt.indexv > 4 ) {
 					curppt.indexh = 4;
+				}
 				
 				presentations[pptId] = curppt;
 				
@@ -155,17 +147,16 @@ exports.setupRemotePresenter = function(app, io, config){
 
 
 function updateSlide(curppt) {
-	if(curppt.indexh < 0 )
+	if(curppt.indexh < 0 ) {
 			curppt.indexh = 0;
+	}
 
-	if(curppt.indexv < 0 )
+	if(curppt.indexv < 0 ) {
 	    curppt.indexv = 0;
+	}
 		
     presentations["myppt"] = curppt;
 }
 
 
-
-
-	
 };

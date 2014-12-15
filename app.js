@@ -10,11 +10,6 @@ var express = require('express')
 
 var app = module.exports = express.createServer();
 
-
-
-
-
-
 // socket io
 var io = require('socket.io');
 
