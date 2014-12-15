@@ -11,13 +11,13 @@ var express = require('express')
 var app = module.exports = express.createServer();
 
 // socket io
-// var io = require('socket.io');
+var io = require('socket.io');
 
 // socket io setup
-// io = io.listen(app);
+io = io.listen(app);
 
 // configure socket.io
-// io.configure(function () {
+io.configure(function () {
   
   // recommended production testing
   //io.enable('browser client minification');  // send minified client
@@ -26,16 +26,16 @@ var app = module.exports = express.createServer();
   
   // io.set('log level', 1); // reduce level of logging to warning only
   
-//   io.set('transports', [
-//       'websocket'
-//     , 'flashsocket'
-//     , 'htmlfile'
-//     , 'xhr-polling'
-//     , 'jsonp-polling'
-//   ]);
+  io.set('transports', [
+      'websocket'
+    , 'flashsocket'
+    , 'htmlfile'
+    , 'xhr-polling'
+    , 'jsonp-polling'
+  ]);
   
   
-// });
+});
 
 
 // configure express
@@ -60,6 +60,6 @@ app.configure('production', function(){
 
 
 // remote control the presentation server code
-routes.setupRemotePresenter(app, config);
+routes.setupRemotePresenter(app, io, config);
 app.listen(process.env.PORT || 3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
