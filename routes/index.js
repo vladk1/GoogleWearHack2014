@@ -42,9 +42,13 @@ exports.setupRemotePresenter = function(app, io, config){
 
 
 	app.get('/getCurrentAddress', function(request, response){
-		var json = {"username":curAddress,"password": curPort};
-	  console.log(json);      // your JSON
-	  response.send(json);    // echo the result back
+			var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
+			
+			var json = {"curAddress":ip,"curPort": curPort};
+			console.log(json);      // your JSON
+			response.send(json);    // echo the result back
+            // alert( data.host);
+		
 	});
   		
 	
@@ -159,6 +163,8 @@ function updateSlide(curppt) {
 		
     presentations["myppt"] = curppt;
 }
+
+
 
 
 	
