@@ -27,8 +27,8 @@ var controlIpAddress = function(req, res) {
 	res.render({msg:'hello word!'});
 }
 
-exports.informCurrentAddress = function(fullAddress, address, port) {
-	fullAddress = fullAddress;
+exports.informCurrentAddress = function(fullAddr, address, port) {
+	fullAddress = fullAddr;
 	curAddress = address;
 	curPort = port;
 }
