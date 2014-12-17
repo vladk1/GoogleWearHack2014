@@ -4,8 +4,9 @@
   "private": true,
   "dependencies": {
     "ejs": ">= 0.0.1",
-    "express": "^4.4.5",
+    "express": "^2.5.8",
     "gzippo": "^0.2.0",
+    "ws": "0.4.x",
     "socket.io": ">= 0.9.6"
   }
 }
