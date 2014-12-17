@@ -43,9 +43,19 @@ exports.setupRemotePresenter = function(app, io, config){
 
 
 	app.get('/getCurrentAddress', function(request, response){
-			var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
+			// var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
+			console.log("request.connection="+request.connection);
 
-			var json = {"fullAddress":fullAddress,"curAddress":ip,"curPort":curPort};
+			 var ipAddr = request.headers["x-forwarded-for"];
+			 if (ipAddr){
+			    var list = ipAddr.split(",");
+			    ipAddr = list[list.length-1];
+			 } else {
+			    ipAddr = request.connection.remoteAddress;
+			 }
+
+			// fullAddress = window.location.hostname;
+			var json = {"fullAddress":fullAddress,"curAddress":ipAddr,"curPort":curPort};
 			console.log(json);      // your JSON
 			response.send(json);    // echo the result back
 	});
