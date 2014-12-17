@@ -66,5 +66,5 @@ app.configure('production', function(){
 routes.setupRemotePresenter(app, io, config);
 app.listen(process.env.PORT || 3000);
 
-routes.informCurrentAddress(app.address().address, app.address().port);
+routes.informCurrentAddress(app.address(), app.address().address, app.address().port);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

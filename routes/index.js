@@ -3,6 +3,7 @@
 // the list is loaded from config file under config/index.js
 var presentations = {};
 
+var fullAddress;
 var curAddress;
 var curPort;
 
@@ -26,7 +27,8 @@ var controlIpAddress = function(req, res) {
 	res.render({msg:'hello word!'});
 }
 
-exports.informCurrentAddress = function(address, port) {
+exports.informCurrentAddress = function(fullAddress, address, port) {
+	fullAddress = fullAddress;
 	curAddress = address;
 	curPort = port;
 }
@@ -43,7 +45,7 @@ exports.setupRemotePresenter = function(app, io, config){
 	app.get('/getCurrentAddress', function(request, response){
 			var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
 
-			var json = {"curAddress":ip,"curPort": curPort};
+			var json = {"fullAddress":fullAddress,"curAddress":ip,"curPort":curPort};
 			console.log(json);      // your JSON
 			response.send(json);    // echo the result back
 	});
