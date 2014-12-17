@@ -73,4 +73,24 @@ console.log("Express server listening on port %d in %s mode", app.address().port
 
 
 
+var wss = new WebSocketServer({server: app})
+console.log("websocket server created")
+
+wss.on("connection", function(ws) {
+  var id = setInterval(function() {
+    ws.send(JSON.stringify(new Date()), function() {  })
+  }, 1000)
+
+  console.log("websocket connection open")
+
+  ws.on("close", function() {
+    console.log("websocket connection close")
+    clearInterval(id)
+  })
+});
+
+wss.on("command", function(ws) {
+  console.log("websocket command data");
+});
+
 
