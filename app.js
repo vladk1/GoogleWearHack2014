@@ -13,31 +13,31 @@ var WebSocketServer = require("ws").Server
 var app = module.exports = express.createServer();
 
 // socket io
-// var io = require('socket.io');
+var io = require('socket.io');
 
-// // socket io setup
-// io = io.listen(app);
+// socket io setup
+io = io.listen(app);
 
-// // configure socket.io
-// io.configure(function () {
+// configure socket.io
+io.configure(function () {
   
-//   // recommended production testing
-//   //io.enable('browser client minification');  // send minified client
-//   //io.enable('browser client etag');          // apply etag caching logic based on version number
-//   //io.enable('browser client gzip');          // gzip the file
+  // recommended production testing
+  //io.enable('browser client minification');  // send minified client
+  //io.enable('browser client etag');          // apply etag caching logic based on version number
+  //io.enable('browser client gzip');          // gzip the file
   
-//   // io.set('log level', 1); // reduce level of logging to warning only
+  // io.set('log level', 1); // reduce level of logging to warning only
   
-//   io.set('transports', [
-//       'websocket'
-//     , 'flashsocket'
-//     , 'htmlfile'
-//     , 'xhr-polling'
-//     , 'jsonp-polling'
-//   ]);
+  io.set('transports', [
+      'websocket'
+    , 'flashsocket'
+    , 'htmlfile'
+    , 'xhr-polling'
+    , 'jsonp-polling'
+  ]);
   
   
-// });
+});
 
 
 
@@ -65,32 +65,9 @@ app.configure('production', function(){
 
 // remote control the presentation server code
 
-routes.setupRemotePresenter(app, config);
+routes.setupRemotePresenter(app, io, config);
 app.listen(process.env.PORT || 3000);
 routes.informCurrentAddress(app.address(), __dirname, app.address().port);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
-
-
-
-
-var wss = new WebSocketServer({server: app})
-console.log("websocket server created")
-
-wss.on("connection", function(ws) {
-  var id = setInterval(function() {
-    ws.send(JSON.stringify(new Date()), function() {  })
-  }, 1000)
-
-  console.log("websocket connection open")
-
-  ws.on("close", function() {
-    console.log("websocket connection close")
-    clearInterval(id)
-  })
-});
-
-wss.on("command", function(ws) {
-  console.log("websocket command data");
-});
 
 
