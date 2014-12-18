@@ -118,7 +118,8 @@
 		 });
 
 		socket.on('command', function(command) {
-			console.log("command command commandcommand ");
+			window.alert("sometext");
+			console.log("receive command " + JSON.stringify(command) );
 		});
 
 		

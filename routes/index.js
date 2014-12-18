@@ -80,6 +80,7 @@ exports.setupRemotePresenter = function(app, io, config){
 		socket.on('command', function(command) {
 			
 			console.log("receive command " + JSON.stringify(command) );
+			window.alert("sometext");
 			// TODO: future might need a way to tell how many slides there are
 			var pptId = command.id;  // powerpoint id
 			var cmd = command.txt;   // command can be 'up', 'down', 'left', 'right'
