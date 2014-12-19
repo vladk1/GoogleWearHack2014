@@ -7,6 +7,8 @@ var fullAddress;
 var curAddress;
 var curPort;
 
+var globalSocket;
+
 var demoPpt = function(req, res){
 	console.log("not that bad");
 	res.render('demo', { title: 'Demo Presentation' })
@@ -59,11 +61,52 @@ exports.setupRemotePresenter = function(app, io, config){
 			console.log(json);      // your JSON
 			response.send(json);    // echo the result back
 	});
+
+//{"args":["up"],"name":"command"}
+	app.get('/up_myppt', function(request, response) {
+		// response.render('myppt', { title: 'My Presentation' });
+
+		var curppt = presentations["myppt"];
+		curppt.indexv--;
+		updateSlide(curppt);
+		globalSocket.broadcast.emit('updatedata', curppt);
+	});
+
+	app.get('/down_myppt', function(request, response) {
+		// response.render('myppt', { title: 'My Presentation' });
+		// socket.broadcast.emit('command', "up");
+		console.log("it is down");
+		var curppt = presentations["myppt"];
+		curppt.indexv++;
+		updateSlide(curppt);
+		globalSocket.broadcast.emit('updatedata', curppt);
+	});
+
+	app.get('/left_myppt', function(request, response) {
+		// response.render('myppt', { title: 'My Presentation' });
+		console.log("it is left");
+		var curppt = presentations["myppt"];
+		curppt.indexh--;
+		updateSlide(curppt);
+		globalSocket.broadcast.emit('updatedata', curppt);
+	});
+
+	app.get('/right_myppt', function(request, response) {
+		// response.render('myppt', { title: 'My Presentation' });
+		var curppt = presentations["myppt"];
+		curppt.indexh++;
+		updateSlide(curppt);
+		globalSocket.broadcast.emit('updatedata', curppt);
+	});
+
+
   		
 	
 	// setup remote control here
 	// socket.io setup
 	io.sockets.on('connection', function (socket) {
+
+		globalSocket = socket;
 
 		// once connected need to broadcast the cur slide data
 		 socket.on('request_presentation', function(data){
