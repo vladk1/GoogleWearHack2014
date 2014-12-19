@@ -71,6 +71,7 @@ exports.setupRemotePresenter = function(app, io, config){
 		// updateSlide(curppt);
 		// globalSocket.broadcast.emit('updatedata', curppt);
 		processSlideChangeRequest("up");
+		response.render('myppt', { title: 'My Presentation' });
 	});
 
 	app.get('/down_myppt', function(request, response) {
@@ -82,6 +83,7 @@ exports.setupRemotePresenter = function(app, io, config){
 		// updateSlide(curppt);
 		// globalSocket.broadcast.emit('updatedata', curppt);
 		processSlideChangeRequest("down");
+		response.render('myppt', { title: 'My Presentation' });
 	});
 
 	app.get('/left_myppt', function(request, response) {
@@ -92,6 +94,7 @@ exports.setupRemotePresenter = function(app, io, config){
 		// updateSlide(curppt);
 		// globalSocket.broadcast.emit('updatedata', curppt);
 		processSlideChangeRequest("left");
+		response.render('myppt', { title: 'My Presentation' });
 	});
 
 	app.get('/right_myppt', function(request, response) {
@@ -102,6 +105,7 @@ exports.setupRemotePresenter = function(app, io, config){
 		// updateSlide(curppt);
 		// globalSocket.broadcast.emit('updatedata', curppt);
 		processSlideChangeRequest("right");
+		response.render('myppt', { title: 'My Presentation' });
 	});
 
 
@@ -138,10 +142,11 @@ function processSlideChangeRequest(command) {
 	console.log("receive command " + JSON.stringify(command) );
 			// window.alert("sometext");
 			// TODO: future might need a way to tell how many slides there are
-			var pptId = command.id;  // powerpoint id
-			var cmd = command.txt;   // command can be 'up', 'down', 'left', 'right'
-			console.log("pptId= "+pptId);
-			console.log("cmd= "+cmd);
+
+			// var pptId = command.id;  // powerpoint id
+			// var cmd = command.txt;   // command can be 'up', 'down', 'left', 'right'
+			// console.log("pptId= "+pptId);
+			// console.log("cmd= "+cmd);
 
 				if (command === "up") {
 					console.log("it is uuuup");
