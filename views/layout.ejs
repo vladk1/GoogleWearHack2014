@@ -142,11 +142,11 @@
 			socket.on('updatedata', function(data) {
 				console.log("Receive update data: " + JSON.stringify(data) );
 				
-				if(data.id == presentation_id)
-				{
+				// if(data.id == presentation_id)
+				// {
 					// go to the respective slide
 					Reveal.navigateTo(data.indexh, data.indexv);
-				}
+				// }
 			});
 			
 		
