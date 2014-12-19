@@ -65,7 +65,7 @@ exports.setupRemotePresenter = function(app, io, config){
 //{"args":["up"],"name":"command"}
 	app.get('/up_myppt', function(request, response) {
 		// response.render('myppt', { title: 'My Presentation' });
-
+		console.log("it is up");
 		var curppt = presentations["myppt"];
 		curppt.indexv--;
 		updateSlide(curppt);
@@ -92,6 +92,7 @@ exports.setupRemotePresenter = function(app, io, config){
 	});
 
 	app.get('/right_myppt', function(request, response) {
+		console.log("it is right");
 		// response.render('myppt', { title: 'My Presentation' });
 		var curppt = presentations["myppt"];
 		curppt.indexh++;
