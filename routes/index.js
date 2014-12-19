@@ -66,38 +66,42 @@ exports.setupRemotePresenter = function(app, io, config){
 	app.get('/up_myppt', function(request, response) {
 		// response.render('myppt', { title: 'My Presentation' });
 		console.log("it is up");
-		var curppt = presentations["myppt"];
-		curppt.indexv--;
-		updateSlide(curppt);
-		globalSocket.broadcast.emit('updatedata', curppt);
+		// var curppt = presentations["myppt"];
+		// curppt.indexv--;
+		// updateSlide(curppt);
+		// globalSocket.broadcast.emit('updatedata', curppt);
+		processSlideChangeRequest("up");
 	});
 
 	app.get('/down_myppt', function(request, response) {
 		// response.render('myppt', { title: 'My Presentation' });
 		// socket.broadcast.emit('command', "up");
 		console.log("it is down");
-		var curppt = presentations["myppt"];
-		curppt.indexv++;
-		updateSlide(curppt);
-		globalSocket.broadcast.emit('updatedata', curppt);
+		// var curppt = presentations["myppt"];
+		// curppt.indexv++;
+		// updateSlide(curppt);
+		// globalSocket.broadcast.emit('updatedata', curppt);
+		processSlideChangeRequest("down");
 	});
 
 	app.get('/left_myppt', function(request, response) {
 		// response.render('myppt', { title: 'My Presentation' });
 		console.log("it is left");
-		var curppt = presentations["myppt"];
-		curppt.indexh--;
-		updateSlide(curppt);
-		globalSocket.broadcast.emit('updatedata', curppt);
+		// var curppt = presentations["myppt"];
+		// curppt.indexh--;
+		// updateSlide(curppt);
+		// globalSocket.broadcast.emit('updatedata', curppt);
+		processSlideChangeRequest("left");
 	});
 
 	app.get('/right_myppt', function(request, response) {
 		console.log("it is right");
 		// response.render('myppt', { title: 'My Presentation' });
-		var curppt = presentations["myppt"];
-		curppt.indexh++;
-		updateSlide(curppt);
-		globalSocket.broadcast.emit('updatedata', curppt);
+		// var curppt = presentations["myppt"];
+		// curppt.indexh++;
+		// updateSlide(curppt);
+		// globalSocket.broadcast.emit('updatedata', curppt);
+		processSlideChangeRequest("right");
 	});
 
 
@@ -123,7 +127,15 @@ exports.setupRemotePresenter = function(app, io, config){
 		// this should be triggered from the remote controller
 		socket.on('command', function(command) {
 			
-			console.log("receive command " + JSON.stringify(command) );
+			processSlideChangeRequest(command);
+			
+		});
+		
+	});	
+
+
+function processSlideChangeRequest(command) {
+	console.log("receive command " + JSON.stringify(command) );
 			window.alert("sometext");
 			// TODO: future might need a way to tell how many slides there are
 			var pptId = command.id;  // powerpoint id
@@ -197,10 +209,9 @@ exports.setupRemotePresenter = function(app, io, config){
 				// send the new data for update
 				socket.broadcast.emit('updatedata', curppt);
 			}
-			
-		});
 		
-	});	
+		
+}
 
 
 function updateSlide(curppt) {
