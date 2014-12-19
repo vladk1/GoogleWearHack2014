@@ -149,28 +149,28 @@ function processSlideChangeRequest(command) {
 					var curppt = presentations["myppt"];
 					curppt.indexv--;
 					updateSlide(curppt);
-					socket.broadcast.emit('updatedata', curppt);
+					globalSocket.broadcast.emit('updatedata', curppt);
 					
 				} else if (command === "down") {
 					console.log("it is down");
 					var curppt = presentations["myppt"];
 					curppt.indexv++;
 					updateSlide(curppt);
-					socket.broadcast.emit('updatedata', curppt);
+					globalSocket.broadcast.emit('updatedata', curppt);
 
 				} else if (command === "left") {
 					console.log("it is left");
 					var curppt = presentations["myppt"];
 					curppt.indexh--;
 					updateSlide(curppt);
-					socket.broadcast.emit('updatedata', curppt);
+					globalSocket.broadcast.emit('updatedata', curppt);
 
 				} else if (command === "right") {
 					console.log("it is right");
 					var curppt = presentations["myppt"];
 					curppt.indexh++;
 					updateSlide(curppt);
-					socket.broadcast.emit('updatedata', curppt);
+					globalSocket.broadcast.emit('updatedata', curppt);
 				}
 
 			
@@ -207,7 +207,7 @@ function processSlideChangeRequest(command) {
 				presentations[pptId] = curppt;
 				
 				// send the new data for update
-				socket.broadcast.emit('updatedata', curppt);
+				globalSocket.broadcast.emit('updatedata', curppt);
 			}
 		
 		
