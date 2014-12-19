@@ -16,7 +16,7 @@ var demoPpt = function(req, res){
 
 var myPpt = function(req, res){
 	console.log("not that bad");
-  res.render('myppt', { title: 'My Presentation' })
+  res.render('newmyppt', { title: 'My Presentation' })
 };
 
 
