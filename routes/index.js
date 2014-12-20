@@ -70,8 +70,9 @@ exports.setupRemotePresenter = function(app, io, config){
 		// curppt.indexv--;
 		// updateSlide(curppt);
 		// globalSocket.broadcast.emit('updatedata', curppt);
-		processSlideChangeRequest("up");
+		
 		response.render('myppt', { title: 'My Presentation' });
+		processSlideChangeRequest("up");
 	});
 
 	app.get('/down_myppt', function(request, response) {
@@ -82,8 +83,9 @@ exports.setupRemotePresenter = function(app, io, config){
 		// curppt.indexv++;
 		// updateSlide(curppt);
 		// globalSocket.broadcast.emit('updatedata', curppt);
-		processSlideChangeRequest("down");
+		
 		response.render('myppt', { title: 'My Presentation' });
+		processSlideChangeRequest("down");
 	});
 
 	app.get('/left_myppt', function(request, response) {
@@ -93,8 +95,9 @@ exports.setupRemotePresenter = function(app, io, config){
 		// curppt.indexh--;
 		// updateSlide(curppt);
 		// globalSocket.broadcast.emit('updatedata', curppt);
-		processSlideChangeRequest("left");
+		
 		response.render('myppt', { title: 'My Presentation' });
+		processSlideChangeRequest("left");
 	});
 
 	app.get('/right_myppt', function(request, response) {
@@ -104,8 +107,9 @@ exports.setupRemotePresenter = function(app, io, config){
 		// curppt.indexh++;
 		// updateSlide(curppt);
 		// globalSocket.broadcast.emit('updatedata', curppt);
-		processSlideChangeRequest("right");
+		
 		response.render('myppt', { title: 'My Presentation' });
+		processSlideChangeRequest("right");
 	});
 
 
@@ -118,7 +122,7 @@ exports.setupRemotePresenter = function(app, io, config){
 		globalSocket = socket;
 
 		// once connected need to broadcast the cur slide data
-		 socket.on('request_presentation', function(data){
+		 globalSocket.on('request_presentation', function(data){
 		 	if(presentations[data.id])
 		 	{
 		 		console.log('sending init presentation data ' + JSON.stringify(presentations[data.id]) );
@@ -126,8 +130,8 @@ exports.setupRemotePresenter = function(app, io, config){
 		 	}
 		 });
 
-		 socket.on('updatedata', function(data) {
-				console.log("Receive update data: " + JSON.stringify(data) );
+		 globalSocket.on('updatedata', function(data) {
+				console.log("updatedata: " + JSON.stringify(data) );
 				
 				// if(data.id == presentation_id)
 				// {
@@ -139,8 +143,8 @@ exports.setupRemotePresenter = function(app, io, config){
 		
 		// send commands to make slide go previous/ next/etc
 		// this should be triggered from the remote controller
-		socket.on('command', function(command) {
-			
+		globalSocket.on('command', function(command) {
+			console.log("command " + JSON.stringify(data) );
 			processSlideChangeRequest(command);
 			
 		});
@@ -230,6 +234,7 @@ function processSlideChangeRequest(command) {
 
 
 function updateSlide(curppt) {
+	console.log("updateSlide with curppt.indexh="+curppt.indexh+" curppt.indexv="+curppt.indexv);
 	if(curppt.indexh < 0 ) {
 			curppt.indexh = 0;
 	}
