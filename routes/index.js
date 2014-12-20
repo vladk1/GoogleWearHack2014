@@ -125,6 +125,16 @@ exports.setupRemotePresenter = function(app, io, config){
 		 		socket.emit('initdata', presentations[data.id]);
 		 	}
 		 });
+
+		 socket.on('updatedata', function(data) {
+				console.log("Receive update data: " + JSON.stringify(data) );
+				
+				// if(data.id == presentation_id)
+				// {
+					// go to the respective slide
+					Reveal.navigateTo(data.indexh, data.indexv);
+				// }
+		});
 		
 		
 		// send commands to make slide go previous/ next/etc
