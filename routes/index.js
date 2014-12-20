@@ -189,41 +189,41 @@ function processSlideChangeRequest(command) {
 				}
 
 			
-			if(presentations[pptId]) {
-				var curppt = presentations[pptId];
-				// update ppt information
+			// if(presentations[pptId]) {
+			// 	var curppt = presentations[pptId];
+			// 	// update ppt information
 
-				if(cmd === 'up') {
-					curppt.indexv--;
-				} else if(cmd === 'down') {
-					curppt.indexv++;
-				} else if(cmd === 'left') {
-					curppt.indexh--;
-				} else if(cmd === 'right') {
-					curppt.indexh++;
-				}
+			// 	if(cmd === 'up') {
+			// 		curppt.indexv--;
+			// 	} else if(cmd === 'down') {
+			// 		curppt.indexv++;
+			// 	} else if(cmd === 'left') {
+			// 		curppt.indexh--;
+			// 	} else if(cmd === 'right') {
+			// 		curppt.indexh++;
+			// 	}
 				
-				if(curppt.indexh < 0 ) {
-					curppt.indexh = 0;
-				}
+			// 	if(curppt.indexh < 0 ) {
+			// 		curppt.indexh = 0;
+			// 	}
 
-				if(curppt.indexh > 4 ) {
-					curppt.indexh = 4;
-				}
+			// 	if(curppt.indexh > 4 ) {
+			// 		curppt.indexh = 4;
+			// 	}
 					
-				if(curppt.indexv < 0 ) {
-					curppt.indexv = 0;
-				}
+			// 	if(curppt.indexv < 0 ) {
+			// 		curppt.indexv = 0;
+			// 	}
 
-				if(curppt.indexv > 4 ) {
-					curppt.indexh = 4;
-				}
+			// 	if(curppt.indexv > 4 ) {
+			// 		curppt.indexh = 4;
+			// 	}
 				
-				presentations[pptId] = curppt;
+			// 	presentations[pptId] = curppt;
 				
-				// send the new data for update
-				globalSocket.broadcast.emit('updatedata', curppt);
-			}
+			// 	// send the new data for update
+			// 	globalSocket.broadcast.emit('updatedata', curppt);
+			// }
 		
 		
 }
