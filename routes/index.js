@@ -211,7 +211,7 @@ function processSlideChangeRequest(command) {
 
 }
 
-function setSlide(collumn, row) {
+function setSlide(column, row) {
 	console.log("setSlide row="+row+" column="+column);
 	var curppt = presentations["myppt"];
 	curppt.indexh = row; // collumn
