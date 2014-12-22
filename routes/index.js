@@ -65,7 +65,7 @@ exports.setupRemotePresenter = function(app, io, config) {
 	app.get('/getCurrentSlide', function(request, response){
 			console.log("getCurrentSlide");
 			var curppt = presentations["myppt"];
-			var json = {"row":curppt.indexh,"column":curppt.indexv};
+			var json = {"column":curppt.indexh,"row":curppt.indexv};
 			console.log(json);      // your JSON
 			response.send(json);    // echo the result back
 	});
@@ -75,7 +75,7 @@ exports.setupRemotePresenter = function(app, io, config) {
 		
 		response.render('myppt', { title: 'My Presentation' });
 		// getting row and column from the url
-		setSlide(request.params.row, request.params.column);
+		setSlide(request.params.column, request.params.row);
 	});
 
 
@@ -211,11 +211,11 @@ function processSlideChangeRequest(command) {
 
 }
 
-function setSlide(row, column) {
+function setSlide(collumn, row) {
 	console.log("setSlide row="+row+" column="+column);
 	var curppt = presentations["myppt"];
-	curppt.indexh = row;
-	curppt.indexv = column;
+	curppt.indexh = row; // collumn
+	curppt.indexv = column; // row
 	updateSlide(curppt);
 	globalSocket.broadcast.emit('updatedata', curppt);
 }
