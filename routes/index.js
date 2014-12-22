@@ -35,7 +35,7 @@ exports.informCurrentAddress = function(fullAddr, address, port) {
 	curPort = port;
 }
 
-exports.setupRemotePresenter = function(app, io, config){
+exports.setupRemotePresenter = function(app, io, config) {
 
 	presentations = config.presentations; // load initial presentation list from config file
 
@@ -62,55 +62,72 @@ exports.setupRemotePresenter = function(app, io, config){
 			response.send(json);    // echo the result back
 	});
 
+	app.get('/getCurrentSlide', function(request, response){
+			console.log("getCurrentSlide");
+			var curppt = presentations["myppt"];
+			var json = {"row":curppt.indexh,"column":curppt.indexv};
+			console.log(json);      // your JSON
+			response.send(json);    // echo the result back
+	});
+
+	app.get('/changeSlide/:row/:column', function(request, response) {
+		console.log("it is changeSlide");
+		
+		response.render('myppt', { title: 'My Presentation' });
+		// getting row and column from the url
+		setSlide(request.params.row, request.params.column);
+	});
+
+
 //{"args":["up"],"name":"command"}
-	app.get('/up_myppt', function(request, response) {
-		// response.render('myppt', { title: 'My Presentation' });
-		console.log("it is up");
-		// var curppt = presentations["myppt"];
-		// curppt.indexv--;
-		// updateSlide(curppt);
-		// globalSocket.broadcast.emit('updatedata', curppt);
+	// app.get('/up_myppt', function(request, response) {
+	// 	// response.render('myppt', { title: 'My Presentation' });
+	// 	console.log("it is up");
+	// 	// var curppt = presentations["myppt"];
+	// 	// curppt.indexv--;
+	// 	// updateSlide(curppt);
+	// 	// globalSocket.broadcast.emit('updatedata', curppt);
 		
-		response.render('myppt', { title: 'My Presentation' });
-		processSlideChangeRequest("up");
-	});
+	// 	response.render('myppt', { title: 'My Presentation' });
+	// 	processSlideChangeRequest("up");
+	// });
 
-	app.get('/down_myppt', function(request, response) {
-		// response.render('myppt', { title: 'My Presentation' });
-		// socket.broadcast.emit('command', "up");
-		console.log("it is down");
-		// var curppt = presentations["myppt"];
-		// curppt.indexv++;
-		// updateSlide(curppt);
-		// globalSocket.broadcast.emit('updatedata', curppt);
+	// app.get('/down_myppt', function(request, response) {
+	// 	// response.render('myppt', { title: 'My Presentation' });
+	// 	// socket.broadcast.emit('command', "up");
+	// 	console.log("it is down");
+	// 	// var curppt = presentations["myppt"];
+	// 	// curppt.indexv++;
+	// 	// updateSlide(curppt);
+	// 	// globalSocket.broadcast.emit('updatedata', curppt);
 		
-		response.render('myppt', { title: 'My Presentation' });
-		processSlideChangeRequest("down");
-	});
+	// 	response.render('myppt', { title: 'My Presentation' });
+	// 	processSlideChangeRequest("down");
+	// });
 
-	app.get('/left_myppt', function(request, response) {
-		// response.render('myppt', { title: 'My Presentation' });
-		console.log("it is left");
-		// var curppt = presentations["myppt"];
-		// curppt.indexh--;
-		// updateSlide(curppt);
-		// globalSocket.broadcast.emit('updatedata', curppt);
+	// app.get('/left_myppt', function(request, response) {
+	// 	// response.render('myppt', { title: 'My Presentation' });
+	// 	console.log("it is left");
+	// 	// var curppt = presentations["myppt"];
+	// 	// curppt.indexh--;
+	// 	// updateSlide(curppt);
+	// 	// globalSocket.broadcast.emit('updatedata', curppt);
 		
-		response.render('myppt', { title: 'My Presentation' });
-		processSlideChangeRequest("left");
-	});
+	// 	response.render('myppt', { title: 'My Presentation' });
+	// 	processSlideChangeRequest("left");
+	// });
 
-	app.get('/right_myppt', function(request, response) {
-		console.log("it is right");
-		// response.render('myppt', { title: 'My Presentation' });
-		// var curppt = presentations["myppt"];
-		// curppt.indexh++;
-		// updateSlide(curppt);
-		// globalSocket.broadcast.emit('updatedata', curppt);
+	// app.get('/right_myppt', function(request, response) {
+	// 	console.log("it is right");
+	// 	// response.render('myppt', { title: 'My Presentation' });
+	// 	// var curppt = presentations["myppt"];
+	// 	// curppt.indexh++;
+	// 	// updateSlide(curppt);
+	// 	// globalSocket.broadcast.emit('updatedata', curppt);
 		
-		response.render('myppt', { title: 'My Presentation' });
-		processSlideChangeRequest("right");
-	});
+	// 	response.render('myppt', { title: 'My Presentation' });
+	// 	processSlideChangeRequest("right");
+	// });
 
 
   		
@@ -162,74 +179,45 @@ function processSlideChangeRequest(command) {
 			// console.log("pptId= "+pptId);
 			// console.log("cmd= "+cmd);
 
-				if (command === "up") {
-					console.log("it is uuuup");
+	if (command === "up") {
+		console.log("it is uuuup");
 
-					var curppt = presentations["myppt"];
-					curppt.indexv--;
-					updateSlide(curppt);
-					globalSocket.broadcast.emit('updatedata', curppt);
-					
-				} else if (command === "down") {
-					console.log("it is down");
-					var curppt = presentations["myppt"];
-					curppt.indexv++;
-					updateSlide(curppt);
-					globalSocket.broadcast.emit('updatedata', curppt);
-
-				} else if (command === "left") {
-					console.log("it is left");
-					var curppt = presentations["myppt"];
-					curppt.indexh--;
-					updateSlide(curppt);
-					globalSocket.broadcast.emit('updatedata', curppt);
-
-				} else if (command === "right") {
-					console.log("it is right");
-					var curppt = presentations["myppt"];
-					curppt.indexh++;
-					updateSlide(curppt);
-					globalSocket.broadcast.emit('updatedata', curppt);
-				}
-
-			
-			// if(presentations[pptId]) {
-			// 	var curppt = presentations[pptId];
-			// 	// update ppt information
-
-			// 	if(cmd === 'up') {
-			// 		curppt.indexv--;
-			// 	} else if(cmd === 'down') {
-			// 		curppt.indexv++;
-			// 	} else if(cmd === 'left') {
-			// 		curppt.indexh--;
-			// 	} else if(cmd === 'right') {
-			// 		curppt.indexh++;
-			// 	}
-				
-			// 	if(curppt.indexh < 0 ) {
-			// 		curppt.indexh = 0;
-			// 	}
-
-			// 	if(curppt.indexh > 4 ) {
-			// 		curppt.indexh = 4;
-			// 	}
-					
-			// 	if(curppt.indexv < 0 ) {
-			// 		curppt.indexv = 0;
-			// 	}
-
-			// 	if(curppt.indexv > 4 ) {
-			// 		curppt.indexh = 4;
-			// 	}
-				
-			// 	presentations[pptId] = curppt;
-				
-			// 	// send the new data for update
-			// 	globalSocket.broadcast.emit('updatedata', curppt);
-			// }
+		var curppt = presentations["myppt"];
+		curppt.indexv--;
+		updateSlide(curppt);
+		globalSocket.broadcast.emit('updatedata', curppt);
 		
-		
+	} else if (command === "down") {
+		console.log("it is down");
+		var curppt = presentations["myppt"];
+		curppt.indexv++;
+		updateSlide(curppt);
+		globalSocket.broadcast.emit('updatedata', curppt);
+
+	} else if (command === "left") {
+		console.log("it is left");
+		var curppt = presentations["myppt"];
+		curppt.indexh--;
+		updateSlide(curppt);
+		globalSocket.broadcast.emit('updatedata', curppt);
+
+	} else if (command === "right") {
+		console.log("it is right");
+		var curppt = presentations["myppt"];
+		curppt.indexh++;
+		updateSlide(curppt);
+		globalSocket.broadcast.emit('updatedata', curppt);
+	}
+
+}
+
+function setSlide(row, column) {
+	console.log("setSlide row="+row+" column="+column);
+	var curppt = presentations["myppt"];
+	curppt.indexh = row;
+	curppt.indexv = column;
+	updateSlide(curppt);
+	globalSocket.broadcast.emit('updatedata', curppt);
 }
 
 
