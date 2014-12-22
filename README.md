@@ -1,42 +1,26 @@
-Remote Presentation Controller
-==============================
+## Remote web/phone/wear Presentation Controller
+### _example how to control presntation thorugh android app / wear app:_
 
-Simple Remote Presentation Controller for Reveal.js using Node.js.
-Presenter can use their mobile devices to control the slides via the controller web interface.
+presentation is made with the help of [reveal.js](https://github.com/hakimel/reveal.js/) and you example is working at:
+[http://present-control.herokuapp.com/myppt](http://present-control.herokuapp.com/myppt)
 
-<img src="http://www.ngo-hung.com/files/images/RemotePresenter.png" />
-[Blog Link](http://www.ngo-hung.com/blog/2012/07/16/remote-controller-for-reveal-js-presentation)
+you can run [android app](https://github.com/vladk1/GoogleWearHack2014AndroidApp), which is compatible with wear.
+and control presentation through simple button control on phone app, or swipe on wear device. 
 
-## Install
+you can put your reveal.js presentation to newmyptt.ejs and update android app with new external link for http requests.
 
-1) Install node.js
+also, presentation will be controlled everywhere through socket message interchange with server.
 
-2) Run
+also, wear app should swipe slides vertically with hand movements. but i didnt have a chance to test it much, as I havent bought the watch yet.
 
-node app.js
+![](http://i62.tinypic.com/f4087m.jpg)
 
-3) Preloaded with 2 sample presentations:
-
-- [http://localhost:3000/demo](http://localhost:3000/demo) : Demo presentation from <http://lab.hakim.se/reveal-js>
-- <http://localhost:3000/myppt>
-
-Open another browser window to open the remote controller:
-
-<http://localhost:3000/controller>
-
-Users can issue up, down, left, right commands to navigate through the slides.
-
-To remote control, just use the dropdown to select which presentation to control, then select one of the slides. 
+![](http://i58.tinypic.com/117wvwn.jpg)
 
 
-## Note
 
-- config/index.js: configure the list of presentations and its initial slides
-- routes/index.js: server logic
-- views/controller.ejs: controller client logic
-- views/layout.ejs: most of the logic for a normal presentations 
-- views/demo.ejs: actual html for 'Demo Presentation'
-- views/myppt.ejs: html for 'My Presentation'
+
+
 
 
 
