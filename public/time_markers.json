@@ -1,0 +1,68 @@
+[
+  {
+    "date": "2014-08-01",
+    "type": "Server",
+    "name": "Larisa",
+    "version": "2.0"
+  },
+  {
+    "date": "2014-08-02",
+    "type": "Server",
+    "name": "Daniel",
+    "version": "2.0"
+  },
+  {
+    "date": "2014-08-03",
+    "type": "Server",
+    "name": "Mihai",
+    "version": "2.0"
+  },
+  {
+    "date": "2014-08-04",
+    "type": "Server",
+    "name": "Malina",
+    "version": "2.0"
+  },
+  {
+    "date": "2014-08-05",
+    "type": "Client",
+    "name": "Andrei",
+    "version": "2.0"
+  },
+  {
+    "date": "2014-08-06",
+    "type": "Client",
+    "name": "Martin",
+    "version": "2.0"
+  },
+  {
+    "date": "2014-08-07",
+    "type": "Client",
+    "name": "Richard",
+    "version": "2.0"
+  },
+  {
+    "date": "2014-08-08",
+    "type": "Client",
+    "name": "Tim",
+    "version": "2.0"
+  },
+  {
+    "date": "2014-08-09",
+    "type": "Client",
+    "name": "Kevin",
+    "version": "2.1"
+  },
+  {
+    "date": "2014-08-10",
+    "type": "Client",
+    "name": "Alex",
+    "version": "3.5"
+  },
+  {
+    "date": "2014-08-11",
+    "type": "Client",
+    "name": "Vlad",
+    "version": "2.2"
+  }
+]

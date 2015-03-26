@@ -1,0 +1,93 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+svg {
+  font: 14px 'Open Sans';
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  fill: #000;
+}
+
+.axis .tick line {
+  stroke: rgba(0, 0, 0, 0.1);
+}
+
+.xaxis .tick text {
+  visibility: hidden;
+}
+
+.area {
+  stroke-width: 1;
+}
+
+.area.outer,
+.legend .outer {
+  /*fill: none;*/
+  /*fill: rgba(230, 230, 255, 0.8);*/
+  stroke: rgba(216, 216, 255, 0.8);
+}
+
+.area.inner,
+.legend .inner {
+  /*fill: none;*/
+  fill: rgba(127, 127, 255, 0.8);
+  stroke: #ff4d4d;
+  stroke-width: 1;
+}
+
+.median-line,
+.legend .median-line {
+  fill: none;
+  stroke: #333333;
+  stroke-width: 3;
+}
+
+
+
+
+
+.legend .legend-bg {
+  fill: rgba(0, 0, 0, 0.5);
+  stroke: rgba(0, 0, 0, 0.5);
+}
+
+.marker.server  .marker-bg,
+.marker.server  path {
+  fill: #1976D2;
+  stroke: #1976D2;
+  stroke-width: 0;
+  opacity: 0.5;
+}
+
+.marker.client .marker-bg,
+.marker.client path {
+  fill: #ff4d4d;
+  stroke: #ff4d4d;
+  stroke-width: 0;
+  opacity: 0.5;
+}
+
+.marker path {
+  fill: none;
+}
+
+.legend text,
+.marker text {
+  fill: #fff;
+  font-weight: bold;
+}
+
+.marker text {
+  text-anchor: middle;
+}
+
+.legend {
+  visibility: hidden;
+}

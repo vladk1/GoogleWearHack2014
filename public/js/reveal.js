@@ -618,6 +618,14 @@ var Reveal = (function(){
 	 * set indices. 
 	 */
 	function slide( h, v ) {
+
+		if (h === 9) {
+			runTimeApproxGraph()
+		}
+		if (h === 8) {
+			runDistanceApproxGraph();
+		}
+
 		// Remember the state before this slide
 		var stateBefore = state.concat();
 

@@ -44,6 +44,8 @@ exports.setupRemotePresenter = function(app, io, config) {
 	app.get('/controller', controllerRoute);
 
 
+
+
 	app.get('/getCurrentAddress', function(request, response){
 			// var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
 			console.log("request.connection="+request.connection);
